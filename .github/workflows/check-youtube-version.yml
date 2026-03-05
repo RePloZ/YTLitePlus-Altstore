@@ -1,8 +1,8 @@
-name: Check Youtube Version
+name: Check YouTube Version
 
 on:
   schedule:
-    - cron: '0 */12 * * *'
+    - cron: '0 */6 * * *'   # every 6 hours
   workflow_dispatch:
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fetch latest Youtube App Store version
+      - name: Fetch latest YouTube App Store version
         id: check
         run: |
           LATEST=$(curl -s "https://itunes.apple.com/lookup?bundleId=com.google.ios.youtube&country=us" \
@@ -41,7 +41,8 @@ jobs:
           git add .github/last_yt_version.txt
           git commit -m "chore: bump tracked YT version to ${{ steps.check.outputs.yt_version }}"
           git push
-    trigger-build:
+
+  trigger-build:
     needs: check
     if: needs.check.outputs.new_version == 'true'
     uses: ./.github/workflows/buildapp.yml
