@@ -1,15 +1,14 @@
+name: Build (Deprecated)
+
+# The build workflow lives in the main YTLitePlus repository.
+# See: YTLitePlus/.github/workflows/buildapp.yml
+
 on:
   workflow_dispatch:
-    inputs:
-      ipa_url:
-        description: 'Direct URL to decrypted YouTube IPA'
-        required: true
-      yt_version:
-        description: 'YouTube version'
-        required: false
 
-  workflow_call:           # ← add this block
-    inputs:
-      yt_version:
-        type: string
-        required: true
+jobs:
+  notice:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deprecation Notice
+        run: echo "This workflow has been moved to the main YTLitePlus repository."
