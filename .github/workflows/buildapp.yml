@@ -1,0 +1,15 @@
+on:
+  workflow_dispatch:
+    inputs:
+      ipa_url:
+        description: 'Direct URL to decrypted YouTube IPA'
+        required: true
+      yt_version:
+        description: 'YouTube version'
+        required: false
+
+  workflow_call:           # ← add this block
+    inputs:
+      yt_version:
+        type: string
+        required: true
